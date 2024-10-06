@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       // Define relación muchos a muchos con Juego
-      Categoria.belongsToMany(models.Juego, { through: 'idd' });
+      Categoria.belongsToMany(models.Juego, { through: 'JuegosCategoria' });
     }
   }
   Categoria.init({

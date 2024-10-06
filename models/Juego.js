@@ -12,9 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       // Define relación muchos a uno con Compra
-      Juego.belongsTo(models.Compra, { foreignKey: 'idd' });
-      // Define relación muchos a muchos con Categoria
-      Juego.belongsToMany(models.Categoria, { through: 'idd' });
+      Juego.belongsToMany(models.Compra, { through: 'ComprasJuegos' });
+      Juego.belongsToMany(models.Categoria, { through: 'JuegosCategoria' });
     }
   }
   Juego.init({

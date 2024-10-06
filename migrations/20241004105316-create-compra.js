@@ -2,15 +2,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Compras', {
+    await queryInterface.createTable('ComprasJuegos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      precio_compra: {
-        type: Sequelize.DECIMAL
+      compraId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Compras',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+      juegoId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Juegos',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
@@ -23,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Compras');
+    await queryInterface.dropTable('ComprasJuegos');
   }
 };

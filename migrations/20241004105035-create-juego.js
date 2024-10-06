@@ -2,27 +2,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Juegos', {
+    await queryInterface.createTable('JuegosCategoria', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      titulo: {
-        type: Sequelize.STRING
+      juegoId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Juegos',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
-      descripcion: {
-        type: Sequelize.STRING
-      },
-      desarrollador: {
-        type: Sequelize.STRING
-      },
-      fecha_lanzamiento: {
-        type: Sequelize.DATE
-      },
-      precio: {
-        type: Sequelize.DECIMAL
+      categoriaId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Categoria',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Juegos');
+    await queryInterface.dropTable('JuegosCategoria');
   }
 };
