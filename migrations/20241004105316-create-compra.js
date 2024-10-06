@@ -2,17 +2,17 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('ComprasJuegos', {
+    await queryInterface.createTable('Compras', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      compraId: {
+      usuarioId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Compras',
+          model: 'Usuarios',
           key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -26,6 +26,10 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
+      },
+      precio_compra: {
+        allowNull: false,
+        type: Sequelize.FLOAT
       },
       createdAt: {
         allowNull: false,
