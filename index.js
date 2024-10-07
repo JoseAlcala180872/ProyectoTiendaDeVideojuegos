@@ -1,4 +1,4 @@
-const { sequelize } = require('./models');
+const { sequelize } = require('./models/Migracion');
 const usuarioDAO = require('./dataAccess/userDAO');
 const juegosDAO = require('./dataAccess/juegosDAO');
 const compraDAO = require('./dataAccess/compraDAO');
