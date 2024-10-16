@@ -3,7 +3,7 @@
 <p align="center">
   - José Alcalá - 180872<br>
   - Rosalía Pérez - 233505<br>
-  - Victor Torres -
+  - Victor Torres - 205869<br>
 </p>
 
 ## Justificación de la eleccion de la base de datos:
