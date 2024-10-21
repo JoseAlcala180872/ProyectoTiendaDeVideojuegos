@@ -11,6 +11,7 @@ app.use(morgan('dev'));
 // Rutas
 app.use('/api/categorias', categoriaRouter);
 app.use('/api/juegos', juegosRouter); 
+app.use('/api/usuarios', usuarioRouter); 
 // Middleware 2
 app.use(globalErrorHandler);
 
@@ -21,6 +22,7 @@ const { globalErrorHandler, AppError } = require('./utils/appError');
 const db = require('./config/config'); // Corregir la ruta
 const categoriaRouter = require('./routes/categoriaRouter');
 const juegosRouter = require('./routes/juegosRouter'); 
+const usuarioRouter = require('./routes/usuarioRouter'); 
 
 
 
