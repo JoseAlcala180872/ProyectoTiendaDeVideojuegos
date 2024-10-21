@@ -1,4 +1,5 @@
-const juegosService = require('../services/juegosService');
+const juegosDAO = require('../dataAccess/juegosDAO');
+
 const { AppError } = require('../utils/appError');
 
 class juegosController {
@@ -9,7 +10,7 @@ class juegosController {
             if (!nombre || !precio || !categoria) {
                 return next(new AppError('Los campos nombre, precio y categoria son requeridos.', 400));
             }
-            const nuevoJuego = await juegosService.crearJuego({ nombre, precio, categoria });
+            const nuevoJuego = await juegosDAO.crearJuego({ nombre, precio, categoria });
             res.status(201).json(nuevoJuego);
         } catch (error) {
             next(new AppError('Error al crear el juego.', 500));
@@ -19,7 +20,7 @@ class juegosController {
     static async getJuegoById(req, res, next) {
         try {
             const id = req.params.id;
-            const juego = await juegosService.getJuegoById(id);
+            const juego = await juegosDAO.getJuegoById(id);
             if (!juego) {
                 return next(new AppError('Juego no encontrado.', 404));
             }
@@ -32,7 +33,7 @@ class juegosController {
     static async getAllJuegos(req, res, next) {
         try {
             const limit = req.query.limit || 10;
-            const juegos = await juegosService.getAllJuegos(limit);
+            const juegos = await juegosDAO.getAllJuegos(limit);
             if (!juegos) {
                 return next(new AppError('Juegos no encontrados.', 404));
             }
@@ -45,12 +46,12 @@ class juegosController {
     static async updateJuego(req, res, next) {
         try {
             const id = req.params.id;
-            const juegoExists = await juegosService.getJuegoById(id);
+            const juegoExists = await juegosDAO.getJuegoById(id);
             if (!juegoExists) {
                 return next(new AppError('Juego no encontrado.', 404));
             }
             const juegoData = req.body;
-            const juego = await juegosService.updateJuego(id, juegoData);
+            const juego = await juegosDAO.updateJuego(id, juegoData);
             res.status(200).json(juego);
         } catch (error) {
             next(new AppError('Error al actualizar el juego.', 500));
@@ -60,11 +61,11 @@ class juegosController {
     static async deleteJuego(req, res, next) {
         try {
             const id = req.params.id;
-            const juegoExists = await juegosService.getJuegoById(id);
+            const juegoExists = await juegosDAO.getJuegoById(id);
             if (!juegoExists) {
                 return next(new AppError('Juego no encontrado.', 404));
             }
-            await juegosService.deleteJuego(id);
+            await juegosDAO.deleteJuego(id);
             res.status(200).json({ mensaje: 'Juego eliminado con éxito.' });
         } catch (error) {
             next(new AppError('Error al eliminar el juego.', 500));
