@@ -4,6 +4,27 @@ const juegosDAO = require('./dataAccess/juegosDAO');
 const compraDAO = require('./dataAccess/compraDAO');
 const categoriaDAO = require('./dataAccess/categoriaDAO');
 const categoriaJuegoDAO = require('./dataAccess/categoriaJuegoDAO');
+
+// Middlewares
+app.use(express.json()); 
+app.use(morgan('dev'));  
+// Rutas
+app.use('/api/categorias', categoriaRouter);
+app.use('/api/juegos', juegosRouter); 
+// Middleware 2
+app.use(globalErrorHandler);
+
+const express = require('express');
+const app = express(); // Corregir los paréntesis
+const morgan = require('morgan');
+const { globalErrorHandler, AppError } = require('./utils/appError');
+const db = require('./config/config'); // Corregir la ruta
+const categoriaRouter = require('./routes/categoriaRouter');
+const juegosRouter = require('./routes/juegosRouter'); 
+
+
+
+//require('dotenv').config({path: 'RUTA'});
 // const compraJuegosDAO = require('../dataAccess/compraJuegosDAO');
 
 // Función asincrónica para realizar transacciones
@@ -60,3 +81,10 @@ async function realizarTransacciones() {
 
 // Ejecutar las transacciones
 realizarTransacciones();
+
+
+// Levanta el servidor gg
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
+});
