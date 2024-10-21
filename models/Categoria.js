@@ -1,11 +1,11 @@
 'use strict';
-const {Model} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Categoria extends Model {
-    
+
     static associate(models) {
       //Asociación muchos a muchos con Juego
-      Categoria.belongsToMany(models.Juego, { through: 'JuegosCategoria' });
+      Categoria.belongsToMany(models.Juego, { through: 'CategoriaJuego' });
 
 
     }
