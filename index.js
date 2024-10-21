@@ -4,6 +4,13 @@ const juegosDAO = require('./dataAccess/juegosDAO');
 const compraDAO = require('./dataAccess/compraDAO');
 const categoriaDAO = require('./dataAccess/categoriaDAO');
 const categoriaJuegoDAO = require('./dataAccess/categoriaJuegoDAO');
+const express=require('express');
+const app=express;
+const morgan =require('morgan');
+const {globalErrorHandler,AppError}=require('/utils/appError');
+const db=require('/config/config');
+const categoriaRouter=require('/routes/categoriaRouter');
+//require('dotenv').config({path: 'RUTA'});
 // const compraJuegosDAO = require('../dataAccess/compraJuegosDAO');
 
 // Función asincrónica para realizar transacciones
