@@ -2,13 +2,15 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Juego extends Model {
-
     static associate(models) {
-
-      //Asociación de muchos a muchos con Compra y Categoria
-      Juego.belongsToMany(models.Compra, { through: 'CompraJuego' });
-      Juego.belongsToMany(models.Categoria, { through: 'CategoriaJuego' });
-
+      Juego.belongsToMany(models.Categoria, {
+        through: 'JuegosCategoria',
+        foreignKey: 'juegoId'
+      });
+      Juego.belongsToMany(models.Compra, {
+        through: 'CompraJuegos',
+        foreignKey: 'juegoId'
+      });
     }
   }
   Juego.init({
@@ -20,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Juego',
+    tableName: 'Juegos'
   });
   return Juego;
 };

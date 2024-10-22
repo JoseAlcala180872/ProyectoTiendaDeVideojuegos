@@ -2,16 +2,17 @@ const juegosDAO = require('../dataAccess/juegosDAO');
 const { AppError } = require('../utils/appError');
 
 class juegosController {
-    
+
     static async crearJuego(req, res, next) {
         try {
-            const { nombre, precio, categoria } = req.body;
-            if (!nombre || !precio || !categoria) {
+            const { titulo, descripcion, desarrollador, fecha_lanzamiento, precio } = req.body;
+            if (!titulo || !descripcion || !desarrollador || !fecha_lanzamiento || !precio) {
                 return next(new AppError('Los campos nombre, precio y categoria son requeridos.', 400));
             }
-            const nuevoJuego = await juegosDAO.crearJuego({ nombre, precio, categoria });
+            const nuevoJuego = await juegosDAO.createJuego({ titulo, descripcion, desarrollador, fecha_lanzamiento, precio });
             res.status(201).json(nuevoJuego);
         } catch (error) {
+            console.log('error crear juego controller: ', error)
             next(new AppError('Error al crear el juego.', 500));
         }
     }

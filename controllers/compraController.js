@@ -1,4 +1,3 @@
-const juegosDAO = require('../dataAccess/juegosDAO');
 const compraDAO = require('../dataAccess/compraDAO');
 const { AppError } = require('../utils/appError');
 
@@ -6,14 +5,28 @@ class compraController {
 
     static async crearCompra(req, res, next) {
         try {
-            const { precio_compra, juego_id, usuario_id } = req.body;
-            if (!nombre || !precio || !categoria) {
-                return next(new AppError('Los campos precio_compra, juego_id, usuario_id son requeridos.', 400));
+            const { usuarioId, juegoId, precio_compra } = req.body;
+
+            // Validate required fields
+            if (!precio_compra || !juegoId || !usuarioId) {
+                return next(new AppError('Se requiere precio_compra, array de juegoId, y usuarioId.', 400));
             }
-            const nuevaCompra = await compraDAO.createCompra({ precio_compra, juego_id, usuario_id });
+
+            // Validate juegos array is not empty
+            if (juegoId.length === 0) {
+                return next(new AppError('Debe incluir al menos un juego en la compra.', 400));
+            }
+
+            const nuevaCompra = await compraDAO.createCompra({
+                precio_compra,
+                usuarioId,
+                juegoId
+            });
+
             res.status(201).json(nuevaCompra);
         } catch (error) {
-            next(new AppError('Error al crear el compra.', 500));
+            console.error('Error en crearCompra:', error);
+            next(new AppError('Error al crear la compra.', 500));
         }
     }
 

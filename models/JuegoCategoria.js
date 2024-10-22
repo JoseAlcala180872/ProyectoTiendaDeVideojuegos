@@ -1,20 +1,12 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class CompraJuego extends Model {
+    class JuegoCategoria extends Model {
         static associate(models) {
-            // Remove the explicit associations here since they're defined in Compra and Juego models
+            // No explicit associations needed here
         }
     }
-    CompraJuego.init({
-        compraId: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            references: {
-                model: 'Compras',
-                key: 'id'
-            }
-        },
+    JuegoCategoria.init({
         juegoId: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -22,11 +14,19 @@ module.exports = (sequelize, DataTypes) => {
                 model: 'Juegos',
                 key: 'id'
             }
+        },
+        categoriaId: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            references: {
+                model: 'Categorias', // Note: pluralized table name
+                key: 'id'
+            }
         }
     }, {
         sequelize,
-        modelName: 'CompraJuego',
-        tableName: 'CompraJuegos'  // Explicitly set table name
+        modelName: 'JuegoCategoria',
+        tableName: 'JuegosCategoria'
     });
-    return CompraJuego;
+    return JuegoCategoria;
 };

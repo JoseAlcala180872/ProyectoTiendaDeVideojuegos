@@ -2,12 +2,11 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Categoria extends Model {
-
     static associate(models) {
-      //Asociación muchos a muchos con Juego
-      Categoria.belongsToMany(models.Juego, { through: 'CategoriaJuego' });
-
-
+      Categoria.belongsToMany(models.Juego, {
+        through: 'JuegosCategoria',
+        foreignKey: 'categoriaId'
+      });
     }
   }
   Categoria.init({
@@ -16,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Categoria',
+    tableName: 'Categorias'  // Explicitly set table name
   });
   return Categoria;
 };

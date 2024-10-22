@@ -5,24 +5,29 @@ const compraDAO = require('./dataAccess/compraDAO');
 const categoriaDAO = require('./dataAccess/categoriaDAO');
 const categoriaJuegoDAO = require('./dataAccess/categoriaJuegoDAO');
 
-// Middlewares
-app.use(express.json()); 
-app.use(morgan('dev'));  
-// Rutas
-app.use('/api/categorias', categoriaRouter);
-app.use('/api/juegos', juegosRouter); 
-app.use('/api/usuarios', usuarioRouter); 
-// Middleware 2
-app.use(globalErrorHandler);
-
 const express = require('express');
-const app = express(); // Corregir los paréntesis
 const morgan = require('morgan');
+const app = express(); // Corregir los paréntesis
+
+// Middlewares
+app.use(express.json());
+app.use(morgan('dev'));
+
 const { globalErrorHandler, AppError } = require('./utils/appError');
 const db = require('./config/config'); // Corregir la ruta
 const categoriaRouter = require('./routes/categoriaRouter');
-const juegosRouter = require('./routes/juegosRouter'); 
-const usuarioRouter = require('./routes/usuarioRouter'); 
+const juegosRouter = require('./routes/juegosRouter');
+const usuarioRouter = require('./routes/usuarioRouter');
+const compraRouter = require('./routes/compraRouter');
+const compraJuegosDAO = require('./dataAccess/compraJuegosDAO');
+
+// Rutas
+app.use('/api/categorias', categoriaRouter);
+app.use('/api/juegos', juegosRouter);
+app.use('/api/usuarios', usuarioRouter);
+app.use('/api/compras', compraRouter);
+// Middleware 2
+app.use(globalErrorHandler);
 
 
 
@@ -36,9 +41,9 @@ async function realizarTransacciones() {
         await sequelize.sync();
 
         const usuario = await usuarioDAO.createUsuario({
-            nombre: 'John Doe',
+            nombre: 'John Doeeee',
             correo: 'john@example.com',
-            contraseña: 'password123'
+            clave: 'password123'
         });
 
         const juego = await juegosDAO.createJuego({
@@ -47,6 +52,14 @@ async function realizarTransacciones() {
             desarrollador: 'Nintendo',
             fecha_lanzamiento: new Date('2017-03-03'),
             precio: 59.99
+        });
+
+        const juego2 = await juegosDAO.createJuego({
+            titulo: 'The Legend of Zelda 2: Breath of the Wild',
+            descripcion: 'An action-adventure game',
+            desarrollador: 'Nintendo',
+            fecha_lanzamiento: new Date('2017-03-03'),
+            precio: 69.99
         });
 
         const categoryAction = await categoriaDAO.createCategoria({
@@ -59,17 +72,45 @@ async function realizarTransacciones() {
             categoriaId: categoryAction.id,
         });
 
+        const categoriaJuego2 = await categoriaJuegoDAO.createCategoriaJuego({
+            juegoId: juego2.id,
+            categoriaId: categoryAction.id,
+        });
+
         const compra = await compraDAO.createCompra({
             usuarioId: usuario.id,
             juegoId: juego.id,
             precio_compra: juego.precio,
         });
 
+        const compraJuego = await compraJuegosDAO.createCompraJuego({
+            compraId: compra.id,
+            juegoId: juego.id,
+        });
+
+        const compra2 = await compraDAO.createCompra({
+            usuarioId: usuario.id,
+            juegoId: [juego.id, juego2.id],
+            precio_compra: juego.precio + juego2.precio,
+        });
+
+        const compraJuego2 = await compraJuegosDAO.createCompraJuego({
+            compraId: compra2.id,
+            juegoId: juego2.id,
+        });
+
+
+        console.log('********************************************************')
         console.log('Se creo exitosamente el usuario: ', usuario);
         console.log('Se creo exitosamente el juego: ', juego);
         console.log('Se creo exitosamente la categoria: ', categoryAction);
         console.log('Se creo exitosamente la relacion: ', categoriaJuego);
+        console.log('Se creo exitosamente la relacion2: ', categoriaJuego2);
         console.log('Se creo exitosamente la compra: ', compra);
+        console.log('Se creo exitosamente la relacion compra - juego: ', compraJuego);
+        console.log('Se creo exitosamente la relacion compra - juego 2 : ', compraJuego2);
+        console.log('Se creo exitosamente la compra con varios items: ', compra2);
+        console.log('********************************************************')
 
         // const compraJuego = await compraJuegosDAO.createCompraJuego();
 
@@ -82,7 +123,7 @@ async function realizarTransacciones() {
 }
 
 // Ejecutar las transacciones
-realizarTransacciones();
+//realizarTransacciones();
 
 
 // Levanta el servidor gg

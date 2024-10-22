@@ -1,9 +1,9 @@
-const CompraJuego = require('../models/CompraJuego.js');
+const { CompraJuego } = require('../models/Migracion');
+
 
 class CompraJuegosDAO {
     async createCompraJuego(compraJuegoData) {
-        const compraJuego = new CompraJuego(compraJuegoData);
-        return await compraJuego.save();
+        return CompraJuego.create(compraJuegoData);
     }
 
     async getCompraJuegosByCompra(compraId) {

@@ -1,17 +1,20 @@
-const usuarioDAO = require('../dataAccess/usuarioDAO');
+const usuarioDAO = require('../dataAccess/userDAO');
+const { sequelize } = require('../models/Migracion');
 const { AppError } = require('../utils/appError');
 
 class usuarioController {
 
     static async crearUsuario(req, res, next) {
         try {
-            const { nombre, correo, contraseña } = req.body;
-            if (!nombre || !correo || !contraseña) {
-                return next(new AppError('Los campos nombre, correo y contraseña son requeridos.', 400));
+            const { nombre, correo, clave } = req.body;
+            if (!nombre || !correo || !clave) {
+                return next(new AppError('Los campos nombre, correo y clave son requeridos.', 400));
             }
-            const nuevoUsuario = await usuarioDAO.crearUsuario({ nombre, correo, contraseña });
+            console.log('creando usuario...', { nombre, correo, clave })
+            const nuevoUsuario = await usuarioDAO.createUsuario({ nombre, correo, clave });
             res.status(201).json(nuevoUsuario);
         } catch (error) {
+            console.log('error in create usuario controller: ', error)
             next(new AppError('Error al crear el usuario.', 500));
         }
     }

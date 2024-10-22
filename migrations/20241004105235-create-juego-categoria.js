@@ -3,14 +3,9 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('JuegosCategoria', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
       juegoId: {
         type: Sequelize.INTEGER,
+        primaryKey: true,
         references: {
           model: 'Juegos',
           key: 'id'
@@ -20,8 +15,9 @@ module.exports = {
       },
       categoriaId: {
         type: Sequelize.INTEGER,
+        primaryKey: true,
         references: {
-          model: 'Categoria',
+          model: 'Categorias', // Note: pluralized table name
           key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -35,6 +31,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+    });
+
+    // Add unique constraint
+    await queryInterface.addConstraint('JuegosCategoria', {
+      fields: ['juegoId', 'categoriaId'],
+      type: 'unique',
+      name: 'juego_categoria_unique'
     });
   },
   async down(queryInterface, Sequelize) {

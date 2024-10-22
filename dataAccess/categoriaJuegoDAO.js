@@ -1,20 +1,20 @@
-const { CategoriaJuego } = require('../models/Migracion');
+const { JuegoCategoria } = require('../models/Migracion');
 
 class CategoriaJuegoDAO {
     async createCategoriaJuego(categoriaJuegoData) {
-        return await CategoriaJuego.create(categoriaJuegoData);
+        return await JuegoCategoria.create(categoriaJuegoData);
     }
 
     async getCategoriaJuegoByIds(categoriaId, juegoId) {
-        return await CategoriaJuego.findOne({ where: { categoriaId, juegoId } });
+        return await JuegoCategoria.findOne({ where: { categoriaId, juegoId } });
     }
 
     async getAllCategoriasJuegos() {
-        return await CategoriaJuego.findAll();
+        return await JuegoCategoria.findAll();
     }
 
     async deleteCategoriaJuego(categoriaJuegoIds) {
-        return await CategoriaJuego.destroy({ where: { id: categoriaJuegoIds } });
+        return await JuegoCategoria.destroy({ where: { id: categoriaJuegoIds } });
     }
 }
 
