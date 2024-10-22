@@ -5,6 +5,8 @@ const compraDAO = require('./dataAccess/compraDAO');
 const categoriaDAO = require('./dataAccess/categoriaDAO');
 const categoriaJuegoDAO = require('./dataAccess/categoriaJuegoDAO');
 
+const bodyParser = require('body-parser')
+
 const express = require('express');
 const morgan = require('morgan');
 const app = express(); // Corregir los paréntesis
@@ -12,6 +14,8 @@ const app = express(); // Corregir los paréntesis
 // Middlewares
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(bodyParser.json())
+
 
 const { globalErrorHandler, AppError } = require('./utils/appError');
 const db = require('./config/config'); // Corregir la ruta

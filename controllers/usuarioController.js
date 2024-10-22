@@ -1,8 +1,31 @@
 const usuarioDAO = require('../dataAccess/userDAO');
 const { sequelize } = require('../models/Migracion');
 const { AppError } = require('../utils/appError');
+const { generateToken } = require('../utils/jwt');
 
 class usuarioController {
+
+    static async login(req, res, next) {
+        try {
+            const { correo, clave } = req.body;
+            if (!correo || !clave) {
+                return next(new AppError('Los campos correo y clave son requeridos.', 400));
+            }
+            console.log('haciendo login...', { correo, clave })
+            const usuarioExiste = await usuarioDAO.login({ correo, clave });
+            console.log('key :', usuarioExiste)
+            let key = null;
+            if (usuarioExiste) {
+                key = generateToken({ usuarioExiste });
+            } else {
+                res.status(401).json({ error: "Credenciales Incorrectas." })
+            }
+            res.json(key); //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvRXhpc3RlIjoiam9obkBleGFtcGxlLmNvbSIsImlhdCI6MTcyOTU3NDQ3NywiZXhwIjoxNzI5NTc4MDc3fQ.xzmIaREowKXpYcE_ew_4y1LLzo5eYwkmv3yXkBFPg8k
+        } catch (error) {
+            console.log('error in login usuario controller: ', error)
+            next(new AppError('Error al hacer login.', 500));
+        }
+    }
 
     static async crearUsuario(req, res, next) {
         try {

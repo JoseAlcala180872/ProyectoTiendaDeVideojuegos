@@ -1,11 +1,12 @@
 const express = require('express');
+const { verifyToken } = require('../utils/jwt');
 const juegosController = require('../controllers/juegosController');
 const router = express.Router();
 
-router.post('/', juegosController.crearJuego);
-router.get('/:id', juegosController.getJuegoById);
-router.get('/', juegosController.getAllJuegos);
-router.put('/:id', juegosController.updateJuego);
-router.delete('/:id', juegosController.deleteJuego);
+router.post('/', verifyToken, juegosController.crearJuego);
+router.get('/:id', verifyToken, juegosController.getJuegoById);
+router.get('/', verifyToken, juegosController.getAllJuegos);
+router.put('/:id', verifyToken, juegosController.updateJuego);
+router.delete('/:id', verifyToken, juegosController.deleteJuego);
 
 module.exports = router;

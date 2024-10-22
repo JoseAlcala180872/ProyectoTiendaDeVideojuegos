@@ -31,7 +31,13 @@
 					"name": "GetAll",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvRXhpc3RlIjoiam9obkBleGFtcGxlLmNvbSIsImlhdCI6MTcyOTU3NDQ3NywiZXhwIjoxNzI5NTc4MDc3fQ.xzmIaREowKXpYcE_ew_4y1LLzo5eYwkmv3yXkBFPg8k",
+								"type": "text"
+							}
+						],
 						"url": "localhost:3000/api/usuarios/"
 					},
 					"response": []
@@ -69,6 +75,24 @@
 						"method": "DELETE",
 						"header": [],
 						"url": "localhost:3000/api/usuarios/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correo\": \"asdf\",\r\n    \"clave\": \"asdf\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3000/api/usuarios/login"
 					},
 					"response": []
 				}

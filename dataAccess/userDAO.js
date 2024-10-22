@@ -1,6 +1,16 @@
 const { Usuario } = require('../models/Migracion');
 
 class UsuarioDao {
+    async login(usuarioData) {
+        const users = await Usuario.findAll();
+        for (let item of users) {
+            if (usuarioData.correo === item.dataValues.correo && usuarioData.clave === item.dataValues.clave) {
+                return usuarioData.correo;
+            }
+        }
+        return false;
+    }
+
     async createUsuario(usuarioData) {
         const user = await Usuario.create(usuarioData);
         return user;
