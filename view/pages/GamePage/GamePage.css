@@ -1,0 +1,51 @@
+:root {
+  --primary-color: #457B9D;
+  --secondary-color: #2a3846;
+  --accent-color: #2DC48D;
+  --text-color: #ffffff;
+  --turquoise: #45A7BF;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.container {
+  display: flex;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+}
+
+.section-title {
+  font-size: 24px;
+  margin: 30px 20px 20px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+
+  .games-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .section-title {
+    font-size: 20px;
+    margin: 20px 15px 15px;
+  }
+}

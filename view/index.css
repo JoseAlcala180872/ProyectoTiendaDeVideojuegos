@@ -1,0 +1,40 @@
+:root {
+  --primary-color: #457B9D;
+  --secondary-color: #2a3846;
+  --accent-color: #2DC48D;
+  --text-color: #ffffff;
+  --turquoise: #45A7BF;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.container {
+  display: flex;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+
+  .main-content {
+    width: 114%;
+    padding: 10px;
+    margin-bottom: 70px; /* Space for mobile nav */
+  }
+  .games-list {
+    flex-direction: column;
+    align-items: center;
+  }
+}
