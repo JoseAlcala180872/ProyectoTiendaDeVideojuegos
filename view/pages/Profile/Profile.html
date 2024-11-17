@@ -4,13 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="icon" href="assets/icon.svg">
-    <link rel="stylesheet" href="./Profile.css">
+    <title>STIM Profile</title>
+    <link rel="stylesheet" href="/pages/Profile/Profile.css">
 </head>
 
 <body>
+    <div class="container">
+        <side-nav></side-nav>
 
+        <main class="content">
+            <top-bar></top-bar>
+            <header class="profile-header">
+                <div class="profile-banner"></div>
+                <div class="profile-info">
+                    <img src="/assets/pfp.png" alt="Profile Avatar" class="profile-avatar">
+                    <div class="profile-details">
+                        <h2>Usuario</h2>
+                        <p class="status">Conectado</p>
+                        <div class="stats">
+                            <div class="stat">
+                                <span class="stat-value">0</span>
+                                <span class="stat-label">Juegos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="recent-activity">
+                <h3>Biblioteca</h3>
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <div class="activity-info">
+                            <h4>No hay juegos por el momento...</h4>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script type="module" src="../../script.js"></script>
 </body>
 
 </html>

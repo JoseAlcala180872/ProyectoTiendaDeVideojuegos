@@ -16,6 +16,19 @@ module.exports = (sequelize, DataTypes) => {
   Juego.init({
     titulo: DataTypes.STRING,
     descripcion: DataTypes.STRING,
+    imagenUrl: {
+      type: DataTypes.JSON,
+      defaultValue: [],
+      get() {
+        const rawValue = this.getDataValue('imagenUrl');
+        return rawValue ? JSON.parse(JSON.stringify(rawValue)) : [];
+      },
+      set(value) {
+        this.setDataValue('imagenUrl',
+          Array.isArray(value) ? value : [value]
+        );
+      }
+    },
     desarrollador: DataTypes.STRING,
     fecha_lanzamiento: DataTypes.DATE,
     precio: DataTypes.DECIMAL

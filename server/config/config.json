@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "password",
-    "database": "videogameShop555",
+    "database": "theshop",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="/index.css">
     <link rel="icon" href="assets/icon.svg">
     <title>Game Store</title>
 </head>
@@ -12,20 +12,12 @@
 <body>
     <div class="container">
         <side-nav></side-nav>
-        <div class="main-content">
+        <div>
             <top-bar></top-bar>
-            <featured-games></featured-games>
-            <h2>Populares</h2>
-            <div class="games-list" style="display: flex; gap: 20px;">
-                <game-card title="Warframe" price="Gratis" tags="FPS,Dragons"
-                    img="https://imgs.search.brave.com/n7TkVAi8uoEA6rP_J7ZkaobdcrTNYsQGP3ZIMNd4pFI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2I2LzUx/L2Y4L2I2NTFmODQz/ZDAyNDZmYjY4YmJk/OGYyMWFlM2Q0NzVi/LmpwZw">
-                </game-card>
-                <game-card title="Unpacking" price="$39.90" tags="Casual,Relaxing"
-                    img="https://imgs.search.brave.com/KujzTPzfIsQpb8LIB_PUkJmVYCxjO6kd-0SjFCvjgmQ/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMubmludGVuZG8u/Y29tL2ltYWdlL3Vw/bG9hZC9hcl8xNjo5/LGNfbHBhZCx3XzEy/NDAvYl93aGl0ZS9m/X2F1dG8vcV9hdXRv/L25jb20vc29mdHdh/cmUvc3dpdGNoLzcw/MDEwMDAwMDQzMjA1/L2FlMThhZmJlZjA1/NmZiYzBlNjhhOTY3/NjMzNTdjNjZhZTkw/YWJkNmY5YWYwMDU2/ZWE3M2Y0ZmNhNjY2/MGJmZWI.jpeg">
-                </game-card>
-                <game-card title="Silent Hill 2" price="$195.00" tags="Terror,Action"
-                    img="https://imgs.search.brave.com/mF8mst60bYdODdfhvfMz6MWAYZSa_dlz4BP2C6GxwQ4/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS52YW5kYWwubmV0/L2kvNjQweDM2MC8x/MC0yMDI0LzIwMjQx/MDIxNjIyNTI4XzEu/anBn">
-                </game-card>
+            <div class="main-content">
+                <featured-games></featured-games>
+                <h2>Populares</h2>
+                <games-grid></games-grid>
             </div>
         </div>
     </div>

@@ -4,7 +4,7 @@ export class SideNav extends HTMLElement {
     }
 
     connectedCallback() {
-        const shadow = this.attachShadow({ mode: 'open' })
+        const shadow = this.attachShadow({ mode: "open" });
         this.#agregarEstilos(shadow);
         this.#render(shadow);
     }
@@ -13,11 +13,11 @@ export class SideNav extends HTMLElement {
         shadow.innerHTML += `
             
         <div class="sidenav-mobile">
-            <img class="logo" src="/view/assets/icon.svg"/>
-            <a href="#" class="nav-item">👤 </a>
-            <a href="#" class="nav-item">📚 </a>
-            <a href="#" class="nav-item">🔍 </a>
-            <a href="#" class="nav-item">❤️ </a>
+            <a href="/">
+                <img class="logo" src="/assets/icon.svg"/>
+            </a>
+            <a href="/profile" class="nav-item">👤 </a>
+            <a href="/profile" class="nav-item">📚 </a>
             
             <a href="#" class="nav-item">🎮 </a>
             <a href="#" class="nav-item">📖 </a>
@@ -25,26 +25,77 @@ export class SideNav extends HTMLElement {
             
         </div>
          <div class="sidenav">
-            <img class="logo" src="/view/assets/iconlogo.svg"/>
-            <a href="#" class="nav-item">👤 Perfil</a>
-            <a href="#" class="nav-item">📚 Biblioteca</a>
-            <a href="#" class="nav-item">🔍 Buscar</a>
-            <a href="#" class="nav-item">❤️ Favoritos</a>
+            <a href="/">
+                <img class="logo" src="/assets/iconlogo.svg"/>
+            </a>
+            <a href="/profile" class="nav-item">👤 Perfil</a>
+            <a href="/profile" class="nav-item">📚 Biblioteca</a>
             
             <div class="section-title">Categoría</div>
-            <a href="#" class="nav-item">🎮 Games</a>
-            <a href="#" class="nav-item">📖 Educational</a>
-            <a href="#" class="nav-item">🎵 Música</a>
+            <a href="#" class="nav-item">🎮 Arcade</a>
+            <a href="#" class="nav-item">📖 Historia</a>
+            <a href="#" class="nav-item">🎵 Ritmo</a>
             
-            <div class="section-title">Tienda</div>
         </div>
     `;
     }
 
     #agregarEstilos(shadow) {
-        let link = document.createElement('link');
-        link.setAttribute('rel', 'stylesheet');
-        link.setAttribute('href', '/view/components/SideNavigation/SideNavigation.css');
-        shadow.appendChild(link);
+        const style = document.createElement("style");
+        style.textContent = `
+                    .sidenav {
+        width: 200px;
+        height: 100vh;
+        background-color: #1D3557;
+        padding: 20px;
+        }
+
+        .logo {
+        font-size: 24px;
+        margin-bottom: 30px;
+        color: var(--text-color);
+        }
+
+        .nav-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        color: var(--text-color);
+        text-decoration: none;
+        margin-bottom: 10px;
+        }
+
+        .nav-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+        }
+
+        .section-title {
+        font-size: 14px;
+        color: #888;
+        margin: 20px 0 10px 0;
+        }
+
+        .sidenav-mobile {
+        display: none;
+        }
+
+        @media (max-width: 768px) {
+        .sidenav-mobile {
+            width: 50px;
+            height: 100%;
+            background-color: var(--secondary-color);
+            padding: 20px;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidenav {
+            display: none;
+        }
+        }
+
+        `;
+        shadow.appendChild(style);
     }
 }

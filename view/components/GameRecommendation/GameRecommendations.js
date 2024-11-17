@@ -22,10 +22,35 @@ export class GameRecommendations extends HTMLElement {
     }
 
     #agregarEstilos(shadow) {
-        let link = document.createElement('link');
-        link.setAttribute('rel', 'stylesheet');
-        link.setAttribute('href', '/view/components/GameRecommendation/GameRecommendation.css');
-        shadow.appendChild(link);
+        const style = document.createElement("style");
+        style.textContent = `
+        .recommendations {
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .recommendation {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+}
+
+        `;
+        shadow.appendChild(style);
     }
 
 }

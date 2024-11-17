@@ -5,11 +5,38 @@ class juegosController {
 
     static async crearJuego(req, res, next) {
         try {
-            const { titulo, descripcion, desarrollador, fecha_lanzamiento, precio } = req.body;
-            if (!titulo || !descripcion || !desarrollador || !fecha_lanzamiento || !precio) {
-                return next(new AppError('Los campos nombre, precio y categoria son requeridos.', 400));
+            const { titulo, descripcion, desarrollador, fecha_lanzamiento, precio, imagenUrl } = req.body;
+            if (!titulo || !descripcion || !desarrollador || !fecha_lanzamiento || !precio || !imagenUrl) {
+                switch (true) {
+                    case !titulo:
+                        return next(new AppError('El campo titulo es requerido.', 400));
+
+                    case !descripcion:
+                        return next(new AppError('El campo descripcion es requerido.', 400));
+
+                    case !desarrollador:
+                        return next(new AppError('El campo desarrollador es requerido.', 400));
+
+                    case !fecha_lanzamiento:
+                        return next(new AppError('El campo fecha de lanzamiento es requerido.', 400));
+
+                    case !precio:
+                        return next(new AppError('El campo precio es requerido.', 400));
+
+                    case !imagenUrl:
+                        return next(new AppError('El campo imagenUrl es requerido.', 400));
+
+                    case Array.isArray(imagenUrl) && imagenUrl.length === 0:
+                        return next(new AppError('Debe proporcionar al menos una imagen.', 400));
+
+                    case precio <= 0:
+                        return next(new AppError('El precio debe ser mayor a 0.', 400));
+
+                    default:
+                        return null;
+                }
             }
-            const nuevoJuego = await juegosDAO.createJuego({ titulo, descripcion, desarrollador, fecha_lanzamiento, precio });
+            const nuevoJuego = await juegosDAO.createJuego({ titulo, descripcion, imagenUrl, desarrollador, fecha_lanzamiento, precio });
             res.status(201).json(nuevoJuego);
         } catch (error) {
             console.log('error crear juego controller: ', error)

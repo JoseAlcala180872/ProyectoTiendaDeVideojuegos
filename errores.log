@@ -58,3 +58,38 @@
 {"level":"error","message":"Error al hacer login."}
 {"level":"error","message":"Error al hacer login."}
 {"level":"error","message":"Error al crear la compra."}
+{"level":"error","message":"Error al solicitar pagina."}
+{"level":"error","message":"Error al solicitar pagina."}
+{"level":"error","message":"ENOENT: no such file or directory, stat '/home/biccsdev/school/web2/ProyectoTiendaDeVideojuegos/server/controllers/public/index.html'"}
+{"level":"error","message":"ENOENT: no such file or directory, stat '/home/biccsdev/school/web2/ProyectoTiendaDeVideojuegos/server/controllers/view/index.html'"}
+{"level":"error","message":"ENOENT: no such file or directory, stat '/home/biccsdev/school/web2/ProyectoTiendaDeVideojuegos/view/pages/profile/profile.html'"}
+{"level":"error","message":"ENOENT: no such file or directory, stat '/home/biccsdev/school/web2/ProyectoTiendaDeVideojuegos/view/gamepage/gamepage.html'"}
+{"level":"error","message":"ENOENT: no such file or directory, stat '/home/biccsdev/school/web2/ProyectoTiendaDeVideojuegos/view/GamePage/GamePage.html'"}
+{"level":"error","message":"ENOENT: no such file or directory, stat '/home/biccsdev/school/web2/ProyectoTiendaDeVideojuegos/view/pages/profile/profile.html'"}
+{"level":"error","message":"ENOENT: no such file or directory, stat '/home/biccsdev/school/web2/ProyectoTiendaDeVideojuegos/view/pages/profile/profile.html'"}
+{"level":"error","message":"Error al obtener los juegos."}
+{"level":"error","message":"Error al obtener los juegos."}
+{"level":"error","message":"Error al obtener los juegos."}
+{"level":"error","message":"Error al obtener los juegos."}
+{"level":"error","message":"Error al obtener los juegos."}
+{"level":"error","message":"Error al obtener los juegos."}
+{"level":"error","message":"Los campos nombre, correo y clave son requeridos."}
+{"level":"error","message":"Los campos nombre, fecha de lanzamiento, precio, urls y categoria son requeridos."}
+{"level":"error","message":"Error al obtener los juegos."}
+{"level":"error","message":"Error al obtener los juegos."}
+{"level":"error","message":"Los campos nombre, fecha de lanzamiento, precio, urls y categoria son requeridos."}
+{"level":"error","message":"Los campos nombre, fecha de lanzamiento, precio, urls y categoria son requeridos."}
+{"level":"error","message":"Los campos nombre, fecha de lanzamiento, precio, urls y categoria son requeridos."}
+{"level":"error","message":"Error al crear el juego."}
+{"level":"error","message":"Error al crear el juego."}
+{"level":"error","message":"Error al crear el juego."}
+{"level":"error","message":"Error al crear el juego."}
+{"level":"error","message":"Error al crear el juego."}
+{"level":"error","message":"Error al hacer login."}
+{"level":"error","message":"Unexpected token , in JSON at position 941"}
+{"level":"error","message":"Game ID is required"}
+{"level":"error","message":"Error al solicitar pagina."}
+{"level":"error","message":"Error al solicitar pagina."}
+{"level":"error","message":"Error al solicitar pagina."}
+{"level":"error","message":"Error al solicitar pagina."}
+{"level":"error","message":"Error al solicitar pagina."}

@@ -5,60 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
-    <link rel="stylesheet" href="./ShoppingCart.css">
+    <link rel="stylesheet" href="/pages/ShoppingCart/ShoppingCart.css">
     <link rel="icon" href="assets/icon.svg">
-    
-<script src="view/components/TopBar/TopBar.js"></script>
-
 </head>
 
 <body>
     <div class="container">
         <side-nav></side-nav>
-        
         <div class="main-content">
-            <top-bar></top-bar>
-            <game-details-header></game-details-header>
-
-            <div class="cart-title"></div>
-            <h2 style="padding: 12px;">Carrito</h2>
-            <div class="cart-item">
-                <img src="https://shared.fastly.steamstatic.com//store_item_assets/steam/apps/2475490/header.jpg?t=1730130927" alt="Mouthwashing">
-                <div class="cart-item-info">
-                    <h3>Mouthwashing</h3>
-                </div>
-                <div class="cart-item-price">$157.99</div>
+            <div class="cart-header">
+                <h2>Carrito</h2>
+                <button class="clear-cart-button" id="clearCart">Limpiar carrito</button>
             </div>
-
-            <div class="cart-item">
-                <img src="https://shared.fastly.steamstatic.com//store_item_assets/steam/apps/3205080/header.jpg?t=1729179915" alt="Bad Parenting 1">
-                <div class="cart-item-info">
-                    <h3>Bad Parenting 1: Mr. Red Face</h3>
-                </div>
-                <div class="cart-item-price">$26.99</div>
-            </div>
-
-            <div class="cart-item">
-                <img src="https://shared.fastly.steamstatic.com//store_item_assets/steam/apps/2172010/header.jpg?t=1730385767" alt="Until Dawn">
-                <div class="cart-item-info">
-                    <h3>Until Dawn™</h3>
-                </div>
-                <div class="cart-item-price">$999.00</div>
-            </div>
-
-            <div class="cart-item">
-                <img src="https://shared.fastly.steamstatic.com//store_item_assets/steam/apps/1222140/header.jpg?t=1667468479" alt="Detroit: Become Human">
-                <div class="cart-item-info">
-                    <h3>Detroit: Become Human</h3>
-                </div>
-                <div class="cart-item-price">$799.00</div>
-            </div>
-            <div class="checkout">
-                <div class="checkout-total">Total estimado: $1982.98</div>
+            <div id="cartItems" class="cart-items"></div>
+            <div class="checkout" id="checkout">
+                <div class="checkout-total">Total: $0.00</div>
                 <button class="checkout-button">Continuar con el pago</button>
             </div>
         </div>
     </div>
+    <script type="module" src="../../script.js"></script>
 </body>
 
 </html>

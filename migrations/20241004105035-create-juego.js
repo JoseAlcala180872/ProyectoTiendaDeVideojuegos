@@ -15,6 +15,10 @@ module.exports = {
       descripcion: {
         type: Sequelize.STRING
       },
+      imagenUrl: {
+        type: Sequelize.JSON,
+        defaultValue: []
+      },
       desarrollador: {
         type: Sequelize.STRING
       },
