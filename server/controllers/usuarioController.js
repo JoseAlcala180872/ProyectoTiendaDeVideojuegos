@@ -16,11 +16,18 @@ class usuarioController {
             console.log('key :', usuarioExiste)
             let key = null;
             if (usuarioExiste) {
-                key = generateToken({ usuarioExiste });
+                key = generateToken({ id: usuarioExiste.id, correo: usuarioExiste.correo });
             } else {
                 res.status(401).json({ error: "Credenciales Incorrectas." })
             }
-            res.json(key); //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvRXhpc3RlIjoiam9obkBleGFtcGxlLmNvbSIsImlhdCI6MTcyOTU3NDQ3NywiZXhwIjoxNzI5NTc4MDc3fQ.xzmIaREowKXpYcE_ew_4y1LLzo5eYwkmv3yXkBFPg8k
+            res.json({
+                key,
+                usuario: {
+                    id: usuarioExiste.id,
+                    nombre: usuarioExiste.nombre,
+                    correo: usuarioExiste.correo
+                }
+            });
         } catch (error) {
             console.log('error in login usuario controller: ', error)
             next(new AppError('Error al hacer login.', 500));

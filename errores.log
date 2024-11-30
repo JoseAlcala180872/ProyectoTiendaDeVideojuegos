@@ -93,3 +93,11 @@
 {"level":"error","message":"Error al solicitar pagina."}
 {"level":"error","message":"Error al solicitar pagina."}
 {"level":"error","message":"Error al solicitar pagina."}
+{"level":"error","message":"Los campos nombre, correo y clave son requeridos."}
+{"level":"error","message":"Los campos nombre, correo y clave son requeridos."}
+{"level":"error","message":"Los campos nombre, correo y clave son requeridos."}
+{"level":"error","message":"Los campos nombre, correo y clave son requeridos."}
+{"level":"error","message":"Los campos nombre, correo y clave son requeridos."}
+{"level":"error","message":"Los campos nombre, correo y clave son requeridos."}
+{"level":"error","message":"Error al hacer login."}
+{"level":"error","message":"Error al hacer login."}

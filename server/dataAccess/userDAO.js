@@ -5,7 +5,7 @@ class UsuarioDao {
         const users = await Usuario.findAll();
         for (let item of users) {
             if (usuarioData.correo === item.dataValues.correo && usuarioData.clave === item.dataValues.clave) {
-                return usuarioData.correo;
+                return item.dataValues;
             }
         }
         return false;

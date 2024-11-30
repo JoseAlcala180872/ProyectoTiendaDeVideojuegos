@@ -28,7 +28,30 @@ export class ShoppingButton extends HTMLElement {
 
     #setupEventListeners(shadow) {
         const button = shadow.querySelector('.shopping-button');
-        button.addEventListener('click', () => this.#handleAddToCart());
+        button.addEventListener('click', () => this.#handleButtonClick());
+    }
+
+    #checkAuthentication() {
+        const userData = localStorage.getItem('userData');
+        return userData ? JSON.parse(userData) : null;
+    }
+
+    #handleButtonClick() {
+        const isAuthenticated = this.#checkAuthentication();
+
+        if (!isAuthenticated) {
+            // Show auth popup if not logged in
+            const authPopup = document.createElement('auth-popup');
+            document.body.appendChild(authPopup);
+
+            // Listen for successful authentication to add to cart
+            window.addEventListener('userAuthenticated', () => {
+                this.#handleAddToCart();
+            }, { once: true }); // Remove listener after first use
+        } else {
+            // User is logged in, proceed with adding to cart
+            this.#handleAddToCart();
+        }
     }
 
     #handleAddToCart() {

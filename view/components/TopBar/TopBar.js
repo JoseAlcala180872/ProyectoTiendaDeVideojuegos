@@ -8,8 +8,56 @@ export class TopBar extends HTMLElement {
     const shadow = this.attachShadow({ mode: 'open' });
     this.#render(shadow);
     this.#updateCartCount();
+    this.#setupEventListeners();
     this.#setupCartListener();
     this.#agregarEstilos(shadow);
+    this.#updateProfilePic();
+  }
+
+  #setupEventListeners() {
+    this.#setupCartListener();
+
+    // Listen for authentication events
+    window.addEventListener('userAuthenticated', () => {
+      this.#updateProfilePic();
+    });
+
+    // Handle profile click
+    this.shadowRoot.querySelector('.profile-link').addEventListener('click', (e) => {
+      if (!this.#checkAuthentication()) {
+        e.preventDefault();
+        this.#showAuthPopup();
+      }
+    });
+
+    // Handle cart click
+    this.shadowRoot.querySelector('.cart-link').addEventListener('click', (e) => {
+      if (!this.#checkAuthentication()) {
+        e.preventDefault();
+        this.#showAuthPopup();
+      }
+    });
+  }
+
+  #checkAuthentication() {
+    const userData = localStorage.getItem('userData');
+    return userData ? JSON.parse(userData) : null;
+  }
+
+  #showAuthPopup() {
+    const authPopup = document.createElement('auth-popup');
+    document.body.appendChild(authPopup);
+  }
+
+  #updateProfilePic() {
+    const userData = localStorage.getItem('userData');
+    const profilePic = this.shadowRoot.querySelector('.profile-pic');
+
+    if (userData) {
+      profilePic.src = '/assets/pfp.png';
+    } else {
+      profilePic.src = '/assets/avatar-placeholder.png';
+    }
   }
 
   #setupCartListener() {
@@ -63,23 +111,23 @@ export class TopBar extends HTMLElement {
 
   #render(shadow) {
     shadow.innerHTML = `
-          <div class="topbar">
-              <div class="search-container">
-                  <input type="text" class="search-input" placeholder="Buscar...">
-              </div>
-              <div class="icons">
-                  <a href="/cart" class="cart-link">
-                      <div class="cart-container">
-                          <span class="cart-icon">🛒</span>
-                          <span class="cart-bubble">0</span>
-                      </div>
-                  </a>    
-                  <a href="/profile">
-                      <img src="/assets/pfp.png" alt="Profile" class="profile-pic">
-                  </a>
-              </div>
-          </div>
-      `;
+      <div class="topbar">
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Buscar...">
+        </div>
+        <div class="icons">
+          <a href="/cart" class="cart-link">
+            <div class="cart-container">
+              <span class="cart-icon">🛒</span>
+              <span class="cart-bubble">0</span>
+            </div>
+          </a>    
+          <a href="/profile" class="profile-link">
+            <img src="/assets/avatar-placeholder.png" alt="Profile" class="profile-pic">
+          </a>
+        </div>
+      </div>
+    `;
   }
 
   #agregarEstilos(shadow) {
