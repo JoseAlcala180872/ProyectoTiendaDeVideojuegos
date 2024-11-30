@@ -68,7 +68,6 @@ export class GamesGrid extends HTMLElement {
             gameCard.setAttribute('title', game.titulo);
             gameCard.setAttribute('price', `$${game.precio}`);
             gameCard.setAttribute('img', game.imagenUrl[0]);
-            // Assuming the API doesn't provide tags, you might want to handle this differently
             gameCard.setAttribute('tags', game.desarrollador);
             gamesGrid.appendChild(gameCard);
         });
