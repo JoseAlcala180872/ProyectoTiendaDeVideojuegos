@@ -245,7 +245,7 @@ export class TopBar extends HTMLElement {
         border: none;
         border-radius: 20px;
         color: var(--text-color);
-        background: var(--primary-color);
+        background: white;
       }
 
       .search-results {

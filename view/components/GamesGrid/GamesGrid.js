@@ -20,8 +20,7 @@ export class GamesGrid extends HTMLElement {
             const categoryId = this.getAttribute('cat-id');
             const isProfile = this.getAttribute('is-profile');
             const userData = JSON.parse(localStorage.getItem('userData'));
-            console.log('userdata: ', userData.usuario, isProfile)
-            const userId = userData.usuario.id;
+            const userId = userData?.usuario?.id;
 
             const [gamesResponse, matchResponse, purchasesResponse] = await Promise.all([
                 fetch('/api/juegos'),

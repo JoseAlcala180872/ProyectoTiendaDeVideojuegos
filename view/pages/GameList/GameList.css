@@ -12,6 +12,11 @@
   padding: 0;
 }
 
+html,
+body {
+  min-height: 100dvh;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -22,6 +27,7 @@ body {
 
 .container {
   display: flex;
+  min-height: 100dvh;
 }
 
 .main-content {

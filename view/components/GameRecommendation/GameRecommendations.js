@@ -12,7 +12,7 @@ export class GameRecommendations extends HTMLElement {
     #render(shadow) {
         shadow.innerHTML.innerHTML += `
         
-        <div class="recommendations">
+        <div class="recommendations" >
             <h2 class="title">Recomendados</h2>
             <div class="games-grid">
                 <slot></slot>

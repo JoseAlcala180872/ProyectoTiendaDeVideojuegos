@@ -105,8 +105,8 @@ export class AuthPopup extends HTMLElement {
     const submitButton = this.shadowRoot.querySelector('button[type="submit"]');
     const errorMessage = this.shadowRoot.querySelector('.error-message');
 
-    title.textContent = this.isLogin ? 'Login' : 'Create Account';
-    toggleButton.textContent = this.isLogin ? 'Need an account?' : 'Already have an account?';
+    title.textContent = this.isLogin ? 'Login' : 'Crear Cuenta';
+    toggleButton.textContent = this.isLogin ? 'No tienes cuenta?' : 'Ya tienes cuenta?';
     nameField.style.display = this.isLogin ? 'none' : 'block';
 
     // Toggle the required attribute based on form type
@@ -118,7 +118,7 @@ export class AuthPopup extends HTMLElement {
       nameInput.disabled = false;
     }
 
-    submitButton.textContent = this.isLogin ? 'Login' : 'Create Account';
+    submitButton.textContent = this.isLogin ? 'Login' : 'Crear Cuenta';
     errorMessage.textContent = '';
   }
 
@@ -134,17 +134,17 @@ export class AuthPopup extends HTMLElement {
               <input type="text" id="nombre" name="nombre" disabled>
             </div>
             <div>
-              <label for="correo">Email</label>
+              <label for="correo">Correo</label>
               <input type="email" id="correo" name="correo" required>
             </div>
             <div>
-              <label for="clave">Password</label>
+              <label for="clave">Clave</label>
               <input type="password" id="clave" name="clave" required>
             </div>
             <div class="error-message"></div>
             <button type="submit">Login</button>
           </form>
-          <button class="toggle-form">Need an account?</button>
+          <button class="toggle-form">No tienes cuenta?</button>
         </div>
       </div>
     `;

@@ -90,7 +90,7 @@ export class SideNav extends HTMLElement {
         style.textContent = `
             .sidenav {
                 width: 200px;
-                height: 100vh;
+                height: 100%;
                 background-color: #1D3557;
                 padding: 20px;
             }
