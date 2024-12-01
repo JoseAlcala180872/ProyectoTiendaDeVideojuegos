@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
 
       //Asociación uno a muchos con Compra
-      Usuario.hasMany(models.Compra);
+      Usuario.hasMany(models.Compra, { foreignKey: 'usuarioId' });
 
     }
   }
@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Usuario',
+    tableName: 'Usuarios',
   });
   return Usuario;
 };

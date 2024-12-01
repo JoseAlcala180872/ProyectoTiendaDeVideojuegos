@@ -1,4 +1,5 @@
 const categoriaDAO = require('../dataAccess/categoriaDAO');
+const categoriaJuegoDAO = require('../dataAccess/categoriaJuegoDAO');
 const { AppError } = require('../utils/appError');
 
 class categoriaController {
@@ -13,6 +14,35 @@ class categoriaController {
             res.status(201).json(categoria);
         } catch (error) {
             next(new AppError('Error al crear categoria.', 500));
+        }
+    }
+
+    static async crearCategoriaMatch(req, res, next) {
+        try {
+            const { juegoId, categoriaId } = req.body;
+            if (!juegoId || !categoriaId) {
+                next(new AppError('Los campos juegoId, categoriaId son requeridos.', 500));
+            }
+            const categoriaData = { juegoId, categoriaId };
+            const categoria = await categoriaJuegoDAO.createCategoriaJuego(categoriaData);
+            res.status(201).json(categoria);
+        } catch (error) {
+            next(new AppError('Error al crear categoria-juego.', 500));
+        }
+    }
+
+    static async obtenerCategoriasMatch(req, res, next) {
+        try {
+            const categorias = await categoriaJuegoDAO.getAllCategoriasJuegos();
+
+            if (!categorias) {
+                next(new AppError('Categorias-Juego no encontradas', 404));
+            }
+
+            res.status(200).json(categorias);
+        } catch (error) {
+            console.log('error al obtener todas las categorias-juego:  ', error)
+            next(new AppError('Error al obtener categorias-juego.', 500));
         }
     }
 

@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get('/', viewController.getHomePage);
 router.get('/game', viewController.getGamePage);
+router.get('/gamelist', viewController.getGameListPage);
 router.get('/cart', viewController.getCarrito);
 router.get('/profile', viewController.getProfile);
 

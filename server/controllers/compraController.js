@@ -20,7 +20,7 @@ class compraController {
             const nuevaCompra = await compraDAO.createCompra({
                 precio_compra: precio_compra,
                 usuarioId: usuarioId,
-                JuegoId: juegoId
+                juegoId: juegoId
             });
 
             res.status(201).json(nuevaCompra);

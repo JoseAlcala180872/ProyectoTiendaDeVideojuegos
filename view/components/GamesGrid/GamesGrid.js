@@ -4,6 +4,10 @@ export class GamesGrid extends HTMLElement {
         this.games = [];
     }
 
+    static get observedAttributes() {
+        return ['cat-id', 'is-profile'];
+    }
+
     async connectedCallback() {
         const shadow = this.attachShadow({ mode: 'open' });
         await this.#fetchGames();
@@ -13,11 +17,62 @@ export class GamesGrid extends HTMLElement {
 
     async #fetchGames() {
         try {
-            const response = await fetch('/api/juegos');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            const categoryId = this.getAttribute('cat-id');
+            const isProfile = this.getAttribute('is-profile');
+            const userData = JSON.parse(localStorage.getItem('userData'));
+            console.log('userdata: ', userData.usuario, isProfile)
+            const userId = userData.usuario.id;
+
+            const [gamesResponse, matchResponse, purchasesResponse] = await Promise.all([
+                fetch('/api/juegos'),
+                fetch('/api/categorias/match'),
+                userId ? fetch('/api/compras') : Promise.resolve(null)
+            ]);
+
+            let [juegos, matches] = await Promise.all([
+                gamesResponse.json(),
+                matchResponse.json()
+            ]);
+
+            console.log('Data fetched:', { juegos, matches, categoryId });
+
+            if (categoryId) {
+                const gameIdsForCategory = matches
+                    .filter(match => match.categoriaId.toString() === categoryId.toString())
+                    .map(match => match.juegoId.toString());
+
+                console.log('Game IDs for category:', gameIdsForCategory);
+
+                this.games = juegos.filter(juego =>
+                    gameIdsForCategory.includes(juego.id.toString())
+                );
+
+                console.log('Filtered games:', this.games);
+                return;
             }
-            this.games = await response.json();
+            console.log('validation: ', isProfile && purchasesResponse)
+            if (isProfile && purchasesResponse) {
+                const purchases = await purchasesResponse.json();
+                const userPurchases = purchases.filter(purchase => {
+                    console.log('purchase before filtering: ', purchase)
+                    return purchase.Usuario?.id.toString() === userId.toString()
+                });
+                console.log('filtered purcharse: ', userPurchases)
+
+                const userGameIds = new Set();
+                userPurchases.forEach(purchase => {
+                    purchase.Juegos?.forEach(juego => {
+                        userGameIds.add(juego.id.toString());
+                    });
+                });
+                console.log('dataaaa: ', userGameIds, juegos, userPurchases, purchases)
+                juegos = juegos.filter(juego =>
+                    userGameIds.has(juego.id.toString())
+                );
+            }
+
+            this.games = juegos;
+            console.log('gamess: ', this.games)
         } catch (error) {
             console.error('Error fetching games:', error);
             this.games = [];
@@ -50,6 +105,13 @@ export class GamesGrid extends HTMLElement {
     }
 
     #render(shadow) {
+
+        while (shadow.firstChild) {
+            shadow.removeChild(shadow.firstChild);
+        }
+
+        this.#addStyles(shadow);
+
         if (!this.games.length) {
             shadow.innerHTML += `
                 <div class="error-message">
@@ -73,5 +135,14 @@ export class GamesGrid extends HTMLElement {
         });
 
         shadow.appendChild(gamesGrid);
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (oldValue !== newValue) {
+            this.#fetchGames().then(() => {
+                const shadow = this.shadowRoot;
+                this.#render(shadow);
+            });
+        }
     }
 }

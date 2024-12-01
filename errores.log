@@ -101,3 +101,14 @@
 {"level":"error","message":"Los campos nombre, correo y clave son requeridos."}
 {"level":"error","message":"Error al hacer login."}
 {"level":"error","message":"Error al hacer login."}
+{"level":"error","message":"Unexpected token ] in JSON at position 1029"}
+{"level":"error","message":"Error al solicitar pagina."}
+{"level":"error","message":"Error al crear la compra."}
+{"level":"error","message":"Error al crear la compra."}
+{"level":"error","message":"Error al crear la compra."}
+{"level":"error","message":"Error al crear la compra."}
+{"level":"error","message":"Error al crear la compra."}
+{"level":"error","message":"Error al crear la compra."}
+{"level":"error","message":"Error al crear la compra."}
+{"level":"error","message":"Error al obtener las compras."}
+{"level":"error","message":"Compras no encontradas."}

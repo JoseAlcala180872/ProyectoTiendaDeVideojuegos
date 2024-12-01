@@ -4,13 +4,14 @@ module.exports = (sequelize, DataTypes) => {
   class Compra extends Model {
     static associate(models) {
       //Asociación uno a muchos con Usuario
-      Compra.belongsTo(models.Usuario);
+      Compra.belongsTo(models.Usuario, { foreignKey: 'usuarioId' });
 
       //Asociación muchos a muchos con Juego
       Compra.belongsToMany(models.Juego, {
         through: models.CompraJuego,
         foreignKey: 'compraId',
-        otherKey: 'juegoId'
+        otherKey: 'juegoId',
+        tableName: 'CompraJuego'
       });
     }
   }

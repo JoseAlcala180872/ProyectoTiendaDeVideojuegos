@@ -3,9 +3,11 @@ const { verifyToken } = require('../utils/jwt');
 const categoriaController = require('../controllers/categoriaController');
 const router = express.Router();
 
-router.get('/', verifyToken, categoriaController.obtenerCategorias);
-router.get('/:id', verifyToken, categoriaController.obtenerCategoriaPorId);
+router.get('/', categoriaController.obtenerCategorias);
+router.get('/match', categoriaController.obtenerCategoriasMatch);
+router.get('/:id', categoriaController.obtenerCategoriaPorId);
 router.post('/', verifyToken, categoriaController.crearCategoria);
+router.post('/match', verifyToken, categoriaController.crearCategoriaMatch);
 router.put('/:id', verifyToken, categoriaController.actualizarCategoria);
 router.delete('/:id', verifyToken, categoriaController.eliminarCategoria);
 
